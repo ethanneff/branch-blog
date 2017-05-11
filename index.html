@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>How to Deep Link in Cordova, PhoneGap, and Ionic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="This is an example of a meta description. This will often show up in search results.">
+  <style type="text/css">
+    body {margin:40px auto; max-width:850px; line-height:1.6; font-size:18px; color:#444; padding:0 10px}
+    h1,h2,h3 {line-height:1.2}
+    table {width: 100%;}
+    td:not(:first-child) {text-align: center;}
+    a {text-decoration: none; color: #00aed9;}
+    th {font-weight: normal;}
+    sup {font-size: xx-small; }
+    li { list-style: none }
+    xmp, samp { width: 100%; overflow: scroll; background-color: #f5f5f5; }
+    article { text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>How to Deep Link in Cordova, PhoneGap, and Ionic</h1>
+  <hr>
+  <section>
+    <h2>Why add deep linking to your app</h2>
+    <p>URLs can navigate to your website, but not to your app. <a href="https://branch.io/what-is-deep-linking" title="What is deep linking">Deep Links</a> allow users to install, open, and pass data into your app. Deep linking will increase app discovery and increasing overall app engagement.</p>
+    <article><a href="https://youtu.be/MXgLQ8QDXk8"><img src="http://i.imgur.com/NF2NEDn.gif"/></a></article>
+  </section>
+  <section>
+    <h2>What plugins allow you to deep link</h2>
+    <table summary="Comparison deep linking solutions for cordova phonegap and ionic.">
+      <thead>
+        <tr>
+          <th></th>
+          <th><a href="https://github.com/EddyVerbruggen/Custom-URL-scheme" title="EddyVerbruggen deep linking github">EddyVerbruggen</a></th>
+          <th><a href="https://github.com/driftyco/ionic-plugin-deeplinks" title="">Driftyco</a></th>
+          <th><a href="https://github.com/nordnet/cordova-universal-links-plugin" title="">Nordnet</a></th>
+          <th><a href="https://github.com/BranchMetrics/cordova-ionic-phonegap-branch-deep-linking" title="Branch deep linking github">Branch</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Number of downloads</td>
+          <td><img src="https://img.shields.io/npm/dt/cordova-plugin-customurlscheme.svg?colorB=00aed9&label=total" alt="npm downloads"></td>
+          <td><img src="https://img.shields.io/npm/dt/ionic-plugin-deeplinks.svg?colorB=00aed9&label=total" alt="npm downloads"></td>
+          <td><img src="https://img.shields.io/npm/dt/cordova-universal-links-plugin.svg?colorB=00aed9&label=total" alt="npm downloads"></td>
+          <td><img src="https://img.shields.io/npm/dt/branch-cordova-sdk.svg?colorB=00aed9&label=total" alt="npm downloads for Branch"></td>
+        </tr>
+        <tr>
+          <td>Free service</td>
+          <td>√</td><td>√</td><td>√</td><td>√</td>
+        </tr>
+        <tr>
+          <td>Supports Cordova</td>
+          <td>√</td><td>√</td><td>√</td><td>√</td>
+        </tr>
+        <tr>
+          <td>Supports PhoneGap</td>
+          <td>√</td><td>√</td><td>√</td><td>√</td>
+        </tr>
+        <tr>
+          <td>Supports Ionic</td>
+          <td>√</td><td>√</td><td>√</td><td>√</td>
+        </tr>
+        <tr>
+          <td>Handles URI Scheme linking<sup> [1]</sup></td>
+          <td>√</td><td>√</td><td>√</td><td>√</td>
+        </tr>
+        <tr>
+          <td>Handles iOS Universal Links<sup> [2]</sup></td>
+          <td></td><td></td><td>√</td><td>√</td>
+        </tr>
+        <tr>
+          <td>Handles Android App Links<sup> [3]</sup></td>
+          <td></td><td></td><td></td><td>√</td>
+        </tr>
+        <tr>
+          <td>Hosts AASA and assetlinks files<sup> [4]</sup></td>
+          <td></td><td></td><td></td><td>√</td>
+        </tr>
+        <tr>
+          <td>Implementation in pure JavaScript<sup> [5]</sup></td>
+          <td></td><td></td><td></td><td>√</td>
+        </tr>
+        <tr>
+          <td>Pass any custom data from deep link into app</td>
+          <td></td><td></td><td></td><td>√</td>
+        </tr>
+        <tr>
+          <td>Tracks attribution through installs</td>
+          <td></td><td></td><td></td><td>√</td>
+        </tr>
+        <tr>
+          <td>Tracks deep link analytics with a dashboard</td>
+          <td></td><td></td><td></td><td>√</td>
+        </tr>
+        <tr>
+          <td>Tracks user and custom event</td>
+          <td></td><td></td><td></td><td>√</td>
+        </tr>
+        <tr>
+          <td>Tracks user referrals</td>
+          <td></td><td></td><td></td><td>√</td>
+        </tr>
+        <tr>
+          <td>Create and share deep links inside the app</td>
+          <td></td><td></td><td></td><td>√</td>
+        </tr>
+        <tr>
+          <td>Supports linking in social media and ad platforms<sup></sup></td>
+          <td></td><td></td><td></td><td>√</td>
+        </tr>
+        <tr>
+          <td>Supported by a full time integration team<sup></sup></td>
+          <td></td><td></td><td></td><td>√</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li><sup>[1]</sup> URI Schemes will open the app, but cannot pass data discretely.</li>
+      <li><sup>[2]</sup> URI Schemes have been depreciated and replaced by Universal Links after iOS 9.2.</li>
+      <li><sup>[3]</sup> Android App Links allow for direct app opens without needing to open the browser first.</li>
+      <li><sup>[4]</sup> The AASA and assetlinks files are needed for Universal Links and App Links to work.</li>
+      <li><sup>[5]</sup> Simplicity in integration. No need to modify the native iOS or Android code.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>How to deep link with Branch</h2>
+    <section>
+      <h4>Configure Branch</h4>
+      <ul>
+        <li><p>Complete your <a href="https://dashboard.branch.io/settings/link" title="Branch dashboard">Branch Dashboard</a></p></li>
+        <ul>
+          <li><img width="100%" src="http://i.imgur.com/wazVu3U.png" alt="branch dashboard"></li>
+          <li><img width="100%" src="http://i.imgur.com/9PEylbS.png" alt="branch link domain"></li>
+        </ul>
+      </ul>
+      <h4>Configure App</h4>
+      <ul>
+        <li>Cordova and Ionic</li>
+        <ul>
+          <li><xmp>
+  <!-- sample config.xml -->
+  <widget id="com.eneff.branch.cordovatestbed" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <!-- Branch -->
+    <plugin name="branch-cordova-sdk" spec="^2.5.0" />
+    <branch-config>
+      <branch-key value="key_live_ndqptlgXNE4LHqIahH1WIpbiyFlb62J3" />
+      <uri-scheme value="branchcordova" />
+      <link-domain value="cordova.app.link" />
+      <ios-team-release value="PW4Q8885U7" />
+    </branch-config>
+          </xmp></li>
+        </ul>
+        <li>PhoneGap</li>
+        <ul>
+          <li><xmp>
+  <!-- sample config.xml -->
+  <widget id="com.eneff.branch.cordovatestbed" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <!-- Branch -->
+    <plugin name="branch-cordova-sdk" spec="^2.5.0" />
+    <branch-config>
+      <branch-key value="key_live_ndqptlgXNE4LHqIahH1WIpbiyFlb62J3" />
+      <uri-scheme value="branchcordova" />
+      <link-domain value="cordova.app.link" />
+      <ios-team-release value="PW4Q8885U7" />
+    </branch-config>
+          </xmp></li>
+        </ul>
+        <li>Change the following values in samp to match your <a href="(https://dashboard.branch.io/settings/link" title="Branch dashboard">Branch Dashboard</a></p></li>
+        <ul>
+          <li><samp>com.eneff.branch.cordovatestbed</samp></li>
+          <li><samp>key_live_ndqptlgXNE4LHqIahH1WIpbiyFlb62J3</samp></li>
+          <li><samp>branchcordova</samp></li>
+          <li><samp>cordova.app.link</samp></li>
+          <li><samp>PW4Q8885U7</samp></li>
+        </ul>
+      </ul>
+    </section>
+    <section>
+      <h4>Initialize Branch</h4>
+      <ul>
+        <li>Cordova and PhoneGap</li>
+        <ul>
+          <li><xmp>
+  // sample index.js
+  var app = {
+    initialize: function() {
+      this.bindEvents();
+    },
+    bindEvents: function() {
+      document.addEventListener('deviceready', this.onDeviceReady, false);
+      document.addEventListener('resume', this.onDeviceResume, false);
+    },
+    onDeviceReady: function() {
+      app.branchInit();
+    },
+    onDeviceResume: function() {
+      app.branchInit();
+    },
+    branchInit: function() {
+      // Branch initialization
+      Branch.initSession(function(data) {
+        // read deep link data on click
+        alert('Deep Link Data: ' + JSON.stringify(data));
+      });
+    }
+  };
+
+  app.initialize();
+          </xmp></li>
+        </ul>
+        <li>Ionic 1</li>
+        <ul>
+          <li><xmp>
+  // sample app.js
+  angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+
+  .run(function($ionicPlatform) {
+    $ionicPlatform.ready(function() {
+      if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        cordova.plugins.Keyboard.disableScroll(true);
+      }
+      if (window.StatusBar) {
+        StatusBar.styleDefault();
+      }
+
+      // Branch
+      $ionicPlatform.on('deviceready', function() {
+        branchInit();
+      });
+
+      $ionicPlatform.on('resume', function() {
+        branchInit();
+      });
+
+      function branchInit() {
+        // Branch initialization
+        Branch.initSession(function(data) {
+          // read deep link data on click
+          alert('Deep Link Data: ' + JSON.stringify(data));
+        });
+      }
+    });
+  })
+  // ...
+          </xmp></li>
+        </ul>
+        <li>Ionic 2 - 3</li>
+        <ul>
+          <li><xmp>
+  // sample app.component.js
+  import { Component } from '@angular/core';
+  import { Platform } from 'ionic-angular';
+  import { StatusBar, Splashscreen } from 'ionic-native';
+
+  import { TabsPage } from '../pages/tabs/tabs';
+
+  // Branch import
+  declare var Branch;
+
+  @Component({
+    template: `<ion-nav [root]="rootPage"></ion-nav>`
+  })
+  export class MyApp {
+    rootPage = TabsPage;
+
+    constructor(platform: Platform) {
+      platform.ready().then(() => {
+        StatusBar.styleDefault();
+        Splashscreen.hide();
+        branchInit();
+      });
+
+      platform.resume.supscribe(() => {
+        branchInit();
+      });
+
+      // Branch initialization
+      const branchInit = () => {
+        // only on devices
+        if (!platform.is('cordova')) { return }
+        Branch.initSession(data => {
+          // read deep link data on click
+          alert('Deep Link Data: ' + JSON.stringify(data));
+        });
+      }
+    }
+  }
+          </xmp></li>
+        </ul>
+      </ul>
+    </section>
+    <section>
+      <h4>Test deep linking in iOS</h4>
+      <ul>
+        <li>Create a deep link from the <a href="https://dashboard.branch.io/marketing" title="Branch dashboard">Branch Dashboard</a></li>
+        <li>Delete your app from the device</li>
+        <li>Compile your app (<samp>cordova run ios</samp>)</li>
+        <li>Paste deep link in  <samp>Apple Notes</samp></li>
+        <li>Long press on the deep link (not 3D Touch)</li>
+        <li>Click <samp>Open in "APP_NAME"</samp> to open your app (<a href="http://i.imgur.com/VJVICXd.png" title="Brnach ios testing">example</a>)</li>
+      </ul>
+    </section>
+      <h4>Test deep linking in Android</h4>
+      <ul>
+        <li>Create a deep link from the <a href="https://dashboard.branch.io/marketing" title="Branch dashboard">Branch Dashboard</a></li>
+        <li>Delete your app from the device</li>
+        <li>Compile your app (<samp>cordova run android</samp>)</li>
+        <li>Paste deep link in <samp>Google Hangouts</samp></li>
+        <li>Click on the deep link to open your app</li>
+      </ul>
+    </section>
+    <section>
+      <h4>More information</h4>
+      <ul>
+        <li><a href="https://github.com/BranchMetrics/cordova-ionic-phonegap-branch-deep-linking" title="branch cordova sdk github">Branch Cordova SDK Documentation</a></li>
+        <li><a href="https://dev.branch.io/" title="branch documentation">Branch Documentation</a></li>
+        <li><a href="https://support.branch.io/support/tickets/new" title="branch support">Branch Support</a></li>
+      </ul>
+    </section>
+  </section>
+</body>
+</html>
